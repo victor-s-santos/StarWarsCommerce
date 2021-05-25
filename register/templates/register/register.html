@@ -1,0 +1,30 @@
+<form class="forms" action="" method="POST">
+    {% csrf_token %}
+    <div>
+        <label class="label">{{ form.first_name.label }}
+            {{ form.first_name }}
+        </label>
+        <label class="label">{{ form.last_name.label }}
+            {{ form.last_name }}
+        </label>
+    </div>
+    <div>
+        <label class="label">{{ form.username.label }}
+            {{ form.username }}
+        </label>
+    </div>
+    <div>
+        <label class="label">{{ form.email.label }}
+            {{ form.email }}
+        </label>
+    </div>
+    <div>
+        <label class="label">{{ form.password1.label }}
+            {{ form.password1 }}
+        </label>
+        <label class="label">{{ form.password2.label }}
+            {{ form.password2 }}
+        </label>
+    </div>
+    <input type="submit" class="btn-submit" value="Finish Signup">
+</form>
