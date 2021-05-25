@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Profile
 
 class RegisterForm(UserCreationForm):
     """User registration starting from inheritance of models UserCreationForm""" 
@@ -12,3 +13,9 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('email', 'username', 'first_name', 'last_name', 'password1', 'password2',)
+
+class ProfileForm(ModelForm):
+    """Get more information about the just registered user"""
+    class Meta:
+        model = Profile
+        fields = ['home_planet', 'height', 'mass']

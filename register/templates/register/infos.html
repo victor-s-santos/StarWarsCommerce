@@ -1,0 +1,16 @@
+<form method="POST">
+    {% csrf_token %}
+    <div class="grid-tres-colunas">
+        <label class="label">{{ form.home_planet.label }}
+            {{ form.home_planet }}
+        </label>
+        <label class="label">{{ form.height.label }}
+            {{ form.height }}
+        </label>
+        <label class="label">{{ form.mass.label }}
+            {{ form.mass }}
+        </label>
+    </div>
+    <input type="submit" class="btn-submit" value="Finish">
+</form>
+<h1>teste</h1>

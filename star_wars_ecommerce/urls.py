@@ -9,5 +9,7 @@ urlpatterns = [
     path('', core_v.home, name='home'),
     #--register--#
     path('register/', v.register, name='register'),
+    path('register/infos/', v.profile, name='profile'),
+    #--admin--#
     path('admin/', admin.site.urls),
 ]
