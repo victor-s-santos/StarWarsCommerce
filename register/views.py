@@ -6,16 +6,13 @@ from django.template.loader import render_to_string
 from .forms import RegisterForm
 from decouple import config
 
-email_destinatario = config('EMAIL_TO')
-email_remetente = config('EMAIL_FROM')
-
-
+ 
 def register(request):
     """Realize the signup user"""
     if request.method == "POST":
         form = RegisterForm(request.POST)
-
         if form.is_valid():
+            email_from = config('EMAIL_FROM')
             form.save()
             messages.success(request, "User has been registered successfully!")
             username = form.cleaned_data.get('email')
@@ -26,8 +23,8 @@ def register(request):
                                     form.cleaned_data)
             mail.send_mail('Sign up Confirmation',
                             body,
-                            email_destinatario,
-                            [email_remetente, form.cleaned_data['email']])
+                            email_from,
+                            [email_from, form.cleaned_data['email']])
             
             return redirect('home')
         else:
