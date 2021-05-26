@@ -1,0 +1,22 @@
+<h1>Login</h1>
+<form method="POST" class="form-group">
+    {% csrf_token %}
+    <div class="form-group">
+        <h1 class="title-login">Login</h1>
+        <div class="input-block">
+            <h2 id="label-login">{{ form.username.label }}</h2>
+            {{form.username}}
+        </div>
+        <div class="input-block">
+            <h2 id="label-login">{{ form.password.label }}</h2>    
+            {{form.password}}
+        </div>
+        <div class="btn-login">
+            <input type="submit" class="btn-submit" value='Login'>
+        </div>
+
+        <div class="links">
+            <a href="/register/reset_password/" class="link-esqueci-senha">esqueceu a senha? </a>
+            <a href="/register">SignUp</a>
+        </div>
+</form>

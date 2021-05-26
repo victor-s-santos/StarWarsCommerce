@@ -10,6 +10,8 @@ urlpatterns = [
     #--register--#
     path('register/', v.register, name='register'),
     path('register/infos/', v.profile, name='profile'),
+        #--login--#
+    path('', include('django.contrib.auth.urls'), name='login'),#só estou usando a url login deste path
     #--admin--#
     path('admin/', admin.site.urls),
 ]
