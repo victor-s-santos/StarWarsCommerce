@@ -8,6 +8,8 @@ from django.urls import path, include
 from register import views as v
 #core imports
 from core import views as core_v
+#commerce imports
+from commerce import views as commerce_v
 
 urlpatterns = [
     path('', core_v.home, name='home'),
@@ -21,7 +23,8 @@ urlpatterns = [
     path('register/reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="password_reset/password_reset_sent.html"), name="password_reset_done"),
     path('register/reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"),name='password_reset_confirm'),
     path('register/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="password_reset/password_reset_complete.html"), name="password_reset_complete"),
-    
+    #--commerce--#
+    path('commerce/', commerce_v.index, name='commerce'),
     #--admin--#
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

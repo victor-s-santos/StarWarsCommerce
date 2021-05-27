@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'register',
     'core',
+    'commerce',
     #pytest
     'model_mommy',
 ]
