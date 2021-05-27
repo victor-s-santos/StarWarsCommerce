@@ -1,6 +1,5 @@
 import pytest
 from pytest import raises
-from django.urls import reverse
 from model_mommy import mommy
 from register.models import Profile
 
