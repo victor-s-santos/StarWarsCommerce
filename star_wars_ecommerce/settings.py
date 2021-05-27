@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'register',
     'core',
+    #pytest
+    'model_mommy',
 ]
 
 MIDDLEWARE = [
