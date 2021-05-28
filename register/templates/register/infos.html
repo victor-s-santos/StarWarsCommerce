@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    <div class="grid-tres-colunas">
-        <label class="label">{{ form.home_planet.label }}
-            {{ form.home_planet }}
-        </label>
-        <label class="label">{{ form.height.label }}
-            {{ form.height }}
-        </label>
-        <label class="label">{{ form.mass.label }}
-            {{ form.mass }}
-        </label>
-    </div>
-    <input type="submit" class="btn-submit" value="Finish">
-</form>
+<div class="mt-5">
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                {{ form.mass|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.height|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.home_planet|as_crispy_field }}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Finish">
+    </form>
+</div>
 {% endblock %}

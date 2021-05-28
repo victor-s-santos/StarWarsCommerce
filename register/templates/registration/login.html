@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>Login</h1>
-<form method="POST" class="form-group">
-    {% csrf_token %}
-    <div class="form-group">
-        <h1 class="title-login">Login</h1>
-        <div class="input-block">
-            <h2 id="label-login">{{ form.username.label }}</h2>
-            {{form.username}}
-        </div>
-        <div class="input-block">
-            <h2 id="label-login">{{ form.password.label }}</h2>    
-            {{form.password}}
-        </div>
-        <div class="btn-login">
-            <input type="submit" class="btn-submit" value='Login'>
-        </div>
+<div class="mt-5">
+    <h1>Login</h1>
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="input-block">
+                {{form.username|as_crispy_field}}
+            </div>
+            <div class="input-block">    
+                {{form.password|as_crispy_field}}
+            </div>
+            <div class="btn-login">
+                <input type="submit" class="btn btn-outline-success" value='Login'>
+            </div>
 
-        <div class="links">
-            <a href="/register/reset_password/">Forgot your password? </a>
-            <a href="/register">SignUp</a>
-        </div>
-</form>
+            <div class="links">
+                <a href="/register/reset_password/" class="btn btn-light">Forgot your password? </a>
+                <a href="/register" class="btn btn-light">SignUp</a>
+            </div>
+    </form>
+</div>
 {% endblock %}

@@ -8,7 +8,7 @@ class RegisterForm(UserCreationForm):
     """User registration starting from inheritance of models UserCreationForm""" 
     first_name = forms.CharField(max_length=30, required=False, label='First Name', help_text='Optional field.')
     last_name = forms.CharField(max_length=30, required=False,label='Last Name', help_text='Optional field.')
-    email = forms.EmailField(required=True, help_text='User email to realize the login.')
+    email = forms.EmailField(required=True, help_text='Required. User email to realize the login.')
 
     class Meta:
         model = User
