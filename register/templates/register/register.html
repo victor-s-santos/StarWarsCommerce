@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <form class="forms" action="" method="POST">
     {% csrf_token %}
     <div>
@@ -28,3 +30,4 @@
     </div>
     <input type="submit" class="btn-submit" value="Finish Signup">
 </form>
+{% endblock %}
