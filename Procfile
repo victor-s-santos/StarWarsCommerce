@@ -1,1 +1,1 @@
-web: gunicorn star_warss_ecommerce.wsgi --log-file - 
+web: gunicorn star_wars_ecommerce.wsgi --log-file - 
