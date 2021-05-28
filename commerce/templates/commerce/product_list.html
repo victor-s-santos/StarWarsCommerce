@@ -3,4 +3,12 @@
 <div class="mt-5">
     <h2>Welcome to Commerce Page!</h2>
 </div>
+<div class="content mt-1">
+    {% for p in products %}
+    <div class="card bg-light text-dark">
+        <div class="card-header">{{ p.product_name }}</div>
+        <div class="card-body">{{ p.unit_price }}</div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

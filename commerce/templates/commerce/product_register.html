@@ -1,6 +1,26 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="mt-5">
     <h2><p>Use the bellow form to register products.</p></h2>
+</div>
+<div class="mt-5">
+    <form class="forms" action="" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                {{ form.product_name|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.unit_price|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.multiple|as_crispy_field }}
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Finish Signup">
+    </form>
 </div>
 {% endblock %}
