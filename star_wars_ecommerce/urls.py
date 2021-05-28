@@ -24,7 +24,8 @@ urlpatterns = [
     path('register/reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"),name='password_reset_confirm'),
     path('register/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="password_reset/password_reset_complete.html"), name="password_reset_complete"),
     #--commerce--#
-    path('commerce/', commerce_v.index, name='commerce'),
+    path('commerce/', commerce_v.product_list, name='product_list'),
+    path('commerce/register_product/', commerce_v.product_register, name='product_register'),
     #--admin--#
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
