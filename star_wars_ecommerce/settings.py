@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'model_mommy',
     #crispy_forms
     'crispy_forms',
+    #django-extensions,
+    'django_extensions',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
