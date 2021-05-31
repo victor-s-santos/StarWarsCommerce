@@ -9,6 +9,7 @@ class Profile(models.Model):
     home_planet = models.CharField(max_length=90)
     height = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
     mass = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(200.0)])
+    published_date = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Profile'

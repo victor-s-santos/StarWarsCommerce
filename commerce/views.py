@@ -2,12 +2,16 @@ from django.shortcuts import render, redirect
 from .models import Product
 from .forms import ProductForm, OrderForm
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def product_list(request):
     """Product List"""
     products = Product.objects.all()
     return render(request, 'commerce/product_list.html', {"products": products})
 
+@staff_member_required
 def product_register(request):
     """Register Products"""
     if request.method == 'POST':
@@ -25,6 +29,7 @@ def product_register(request):
         form = ProductForm()
     return render(request, 'commerce/product_register.html', {'form': form})
 
+@login_required
 def product_order(request):
     """Product Orders"""
     if request.method == 'POST':

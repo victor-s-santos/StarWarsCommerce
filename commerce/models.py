@@ -7,6 +7,7 @@ class Product(models.Model):
     product_name = models.CharField("Product", max_length=100, blank=False, null=False)
     unit_price = models.FloatField("Unit Price (R$)", validators=[MinValueValidator(10.0), MaxValueValidator(10000000.0)], blank=False, null=False)
     multiple = models.IntegerField("Multiple", null=True, blank=True)
+    published_date = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Product'
@@ -20,6 +21,7 @@ class Order(models.Model):
     product_name = models.ForeignKey(Product, unique=False, on_delete=models.CASCADE)
     suggested_price = models.FloatField("Suggested Price (R$)", validators=[MinValueValidator(10.0), MaxValueValidator(10000000.0)], blank=False, null=False)
     amount = models.IntegerField("Amount", null=True, blank=True)
+    published_date = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Order'
