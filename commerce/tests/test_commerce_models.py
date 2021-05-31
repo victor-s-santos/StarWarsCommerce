@@ -37,11 +37,19 @@ def test_register_order():
     assert Order.objects.count() == 2
 
 @pytest.mark.django_db
-def test_fields_profile():
+def test_exists_fields_product():
     """Must return true for any field"""
     assert Product.product_name
     assert Product.unit_price
     assert Product.multiple
+
+@pytest.mark.django_db
+def test_exists_fields_order():
+    """Must return true for any field"""
+    assert Order.user
+    assert Order.product_name
+    assert Order.suggested_price
+    assert Order.amount
 
 @pytest.mark.django_db
 @pytest.mark.parametrize('product_field, db_field', list_product_fields)
@@ -60,7 +68,7 @@ def test_order_fields(order_field, db_field):
     assert type(o) == f
 
 @pytest.mark.django_db
-def test_invalid_fields_profile():
+def test_invalid_fields_product():
     """Must return attributeerror for any field"""
     with raises(AttributeError):
         Product.nome_produto
@@ -69,3 +77,14 @@ def test_invalid_fields_profile():
     with raises(AttributeError):
         Product.multiplo
 
+@pytest.mark.django_db
+def test_invalid_fields_order():
+    """Must return attributeerror for any field"""
+    with raises(AttributeError):
+        Order.usuario
+    with raises(AttributeError):
+        Order.nome_produto
+    with raises(AttributeError):
+        Order.preco_sugerido
+    with raises(AttributeError):
+        Order.quantidade
