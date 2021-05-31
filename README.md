@@ -46,6 +46,9 @@
 * ## __Create the SuperUser:__
     - python manage.py createsuperuser
 
+* ## __Run tests:__
+    - pytest -v
+
 * ## __OBS:__
     - The login must be with the email instead of username even in the admin page.
     
