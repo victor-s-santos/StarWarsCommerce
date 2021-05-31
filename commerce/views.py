@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Product
-from .forms import ProductForm
+from .forms import ProductForm, OrderForm
 from django.contrib import messages
 
 def product_list(request):
@@ -24,3 +24,19 @@ def product_register(request):
     else:
         form = ProductForm()
     return render(request, 'commerce/product_register.html', {'form': form})
+
+def product_order(request):
+    """Product Orders"""
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            order.save()
+            return redirect('product_order')
+        else:
+            messages.error(request, 'Bad profitability or invalid amount.')
+            return render(request, 'commerce/product_order.html', {'form': form})
+    else:
+        form = OrderForm()
+    return render(request, 'commerce/product_order.html', {'form': form})

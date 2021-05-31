@@ -1,6 +1,9 @@
 # StarWars Ecommerce
 `A place where you can buy anything you want to dominate the galaxy.`
 
+## This page in heroku
+`If you would like to take a look in this page in production you can access: https://starwars-ecommerce.herokuapp.com`
+
 * ## __About__
     - It is a funny webpage that simulate the issuing sales orders;
 
