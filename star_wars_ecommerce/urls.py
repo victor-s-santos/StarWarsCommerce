@@ -25,11 +25,13 @@ urlpatterns = [
     path('register/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="password_reset/password_reset_complete.html"), name="password_reset_complete"),
     #--commerce--#
     path('commerce/', commerce_v.product_list, name='product_list'),
-    path('commerce/<int:pk>/', commerce_v.detail_product, name='detail_product'),
-    path('commerce/<int:pk>/edit/', commerce_v.product_edit, name='product_edit'),
+    path('commerce/product_list/<int:pk>/', commerce_v.detail_product, name='detail_product'),
+    path('commerce/product_list/<int:pk>/edit/', commerce_v.product_edit, name='product_edit'),
     path('commerce/register_product/', commerce_v.product_register, name='product_register'),
-    path('commerce/product_order/', commerce_v.product_order, name='product_order'),
+    path('commerce/register_order/', commerce_v.register_order, name='product_order'),
     path('commerce/order_list/', commerce_v.order_list, name='order_list'),
+    path('commerce/order_list/<int:pk>/', commerce_v.order_detail, name='order_detail'),
+    path('commerce/order_list/<int:pk>/edit/', commerce_v.order_edit, name='order_edit'),
     #--admin--#
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -61,7 +61,7 @@ def order_list(request):
     return render(request, 'commerce/order_list.html', {"orders": orders})
 
 @login_required
-def product_order(request):
+def register_order(request):
     """Product Orders"""
     if request.method == 'POST':
         form = OrderForm(request.POST)
@@ -76,3 +76,26 @@ def product_order(request):
         form = OrderForm()
     return render(request, 'commerce/product_order.html', {'form': form})
 
+@login_required
+def order_detail(request, pk):
+    """Order detail"""
+    order = get_object_or_404(Order, pk=pk)
+    return render(request, 'commerce/order_detail.html', {'order': order})
+
+@login_required
+def order_edit(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            order.published_date = timezone.now()
+            order.save()
+            return redirect('detail_product', pk=product.pk)
+        else:
+            messages.error(request, 'Invalid Values.')
+            return render(request, 'commerce/product_edit.html', {'form': form})
+    else:
+        form = OrderForm(instance=order)
+    return render(request, 'commerce/order_edit.html', {'form': form})
