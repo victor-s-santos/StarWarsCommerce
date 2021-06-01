@@ -4,7 +4,13 @@ from .forms import ProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, ListView
+from django.utils.decorators import method_decorator
+
+@method_decorator(login_required(), name='dispatch')
+class ProductList(ListView):
+    model = Product
+
 
 @login_required
 def product_list(request):
