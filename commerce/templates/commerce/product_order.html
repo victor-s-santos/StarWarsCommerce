@@ -20,7 +20,14 @@
                 {{ form.amount|as_crispy_field }}
             </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Finish Signup">
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+        {% for error in form.errors %}
+            <strong>{{ form.non_field_errors }}</strong>
+        {% endfor %}
+        </div>
+        {% endif %}
+        <input type="submit" class="btn btn-primary" value="Finish Order">
     </form>
 </div>
 {% endblock %}

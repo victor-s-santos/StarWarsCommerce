@@ -28,6 +28,7 @@ urlpatterns = [
     path('commerce/register_product/', commerce_v.product_register, name='product_register'),
     path('commerce/product_order/', commerce_v.product_order, name='product_order'),
     path('commerce/order_list/', commerce_v.order_list, name='order_list'),
+    #path('<id>/delete', commerce_v.delete_view, name='delete_order'),
     #--admin--#
     path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

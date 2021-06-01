@@ -4,6 +4,7 @@ from .forms import ProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DeleteView
 
 @login_required
 def product_list(request):
@@ -17,6 +18,9 @@ def order_list(request):
     orders = Order.objects.filter(user=request.user)
     return render(request, 'commerce/order_list.html', {"orders": orders})
 
+"""class OrderDeleteView(DeleteView):
+    model = Order
+"""
 
 @staff_member_required
 def product_register(request):
@@ -47,7 +51,6 @@ def product_order(request):
             order.save()
             return redirect('product_order')
         else:
-            messages.error(request, 'Bad profitability or invalid amount.')
             return render(request, 'commerce/product_order.html', {'form': form})
     else:
         form = OrderForm()

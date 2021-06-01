@@ -10,6 +10,13 @@
         <div class="card-body">{{ o.suggested_price }}</div>
         <div class="card-footer">{{ o.amount }}</div>
     </div>
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        Are you want to delete this item ?
+        <input type="submit" value="Yes" />
+        <a href="/">Cancel </a>
+    </form> 
     {% endfor %}
 </div>
 {% endblock %}

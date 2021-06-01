@@ -17,7 +17,7 @@ class Product(models.Model):
         return self.product_name
 
 class Order(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, unique=False)
     product_name = models.ForeignKey(Product, unique=False, on_delete=models.CASCADE)
     suggested_price = models.FloatField("Suggested Price (R$)", validators=[MinValueValidator(10.0), MaxValueValidator(10000000.0)], blank=False, null=False)
     amount = models.IntegerField("Amount", null=True, blank=True)
