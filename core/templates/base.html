@@ -35,6 +35,27 @@
         <div class="col-md-8">
           {% block content %}
           {% endblock %}
+          <!--messages-->
+          {% if messages %}
+          {% for msg in messages %}
+          {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+          <div class="alert alert-danger" role="alert">
+              <div>
+                  <p>{{ msg }}</p>
+              </div>
+          </div>
+          {% endif %}
+          {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+          <div class="alert alert-success" role="alert">
+              <div>
+                  <p>{{ msg }}</p>
+              </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          </div>
+          {% endif %}
+          <!--end messages-->
         </div>
       </div>
     </div>

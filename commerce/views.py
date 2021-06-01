@@ -69,6 +69,7 @@ def register_order(request):
             order = form.save(commit=False)
             order.user = request.user
             order.save()
+            messages.success(request, 'You have successfully registered order from the product!')
             return redirect('product_order')
         else:
             return render(request, 'commerce/product_order.html', {'form': form})
