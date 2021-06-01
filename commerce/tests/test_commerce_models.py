@@ -11,7 +11,7 @@ list_product_fields = [
 ]
 
 list_order_fields = [
-    (Order._meta.get_field("user"), OneToOneField),
+    (Order._meta.get_field("user"), ForeignKey),
     (Order._meta.get_field("product_name"), ForeignKey),
     (Order._meta.get_field("suggested_price"), FloatField),
     (Order._meta.get_field("amount"), IntegerField),

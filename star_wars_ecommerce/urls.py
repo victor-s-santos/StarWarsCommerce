@@ -26,6 +26,7 @@ urlpatterns = [
     #--commerce--#
     path('commerce/', commerce_v.product_list, name='product_list'),
     path('commerce/<int:pk>/', commerce_v.detail_product, name='detail_product'),
+    path('commerce/<int:pk>/edit/', commerce_v.product_edit, name='product_edit'),
     path('commerce/register_product/', commerce_v.product_register, name='product_register'),
     path('commerce/product_order/', commerce_v.product_order, name='product_order'),
     path('commerce/order_list/', commerce_v.order_list, name='order_list'),

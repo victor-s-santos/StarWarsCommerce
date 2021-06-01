@@ -7,8 +7,10 @@
     <div class="card bg-light text-dark">
         <div class="card-header">{{ product.product_name }}</div>
         <div class="card-body"><li>Price: {{ product.unit_price }}</li><li>Multiples: {{ product.multiple }}</li></div>
-
         <div class="card-footer"><a href="{% url 'product_order' %}"><button class="btn btn-success">Buy</button></a></div>
+        {% if user.is_superuser %}
+        <div class="card-footer"><a class="btn btn-primary" href="{% url 'product_edit' pk=product.pk %}">Update</a></div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

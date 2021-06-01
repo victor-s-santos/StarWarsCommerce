@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from django.contrib import messages
@@ -17,11 +18,22 @@ def detail_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'commerce/product_detail.html', {'product': product})
 
-@login_required
-def order_list(request):
-    """Order List"""
-    orders = Order.objects.filter(user=request.user)
-    return render(request, 'commerce/order_list.html', {"orders": orders})
+@staff_member_required
+def product_edit(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.published_date = timezone.now()
+            product.save()
+            return redirect('detail_product', pk=product.pk)
+        else:
+            messages.error(request, 'Invalid Values.')
+            return render(request, 'commerce/product_edit.html', {'form': form})
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'commerce/product_edit.html', {'form': form})
 
 
 @staff_member_required
@@ -43,6 +55,12 @@ def product_register(request):
     return render(request, 'commerce/product_register.html', {'form': form})
 
 @login_required
+def order_list(request):
+    """Order List"""
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'commerce/order_list.html', {"orders": orders})
+
+@login_required
 def product_order(request):
     """Product Orders"""
     if request.method == 'POST':
@@ -57,3 +75,4 @@ def product_order(request):
     else:
         form = OrderForm()
     return render(request, 'commerce/product_order.html', {'form': form})
+

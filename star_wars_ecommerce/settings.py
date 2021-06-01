@@ -133,3 +133,4 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 #redirect logout and login
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
