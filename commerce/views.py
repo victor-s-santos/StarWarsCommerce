@@ -1,16 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.views.generic import DeleteView, ListView
-from django.utils.decorators import method_decorator
-
-@method_decorator(login_required(), name='dispatch')
-class ProductList(ListView):
-    model = Product
-
+from django.views.generic import DeleteView, ListView, UpdateView, DetailView
 
 @login_required
 def product_list(request):
@@ -19,14 +13,16 @@ def product_list(request):
     return render(request, 'commerce/product_list.html', {"products": products})
 
 @login_required
+def detail_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'commerce/product_detail.html', {'product': product})
+
+@login_required
 def order_list(request):
     """Order List"""
     orders = Order.objects.filter(user=request.user)
     return render(request, 'commerce/order_list.html', {"orders": orders})
 
-"""class OrderDeleteView(DeleteView):
-    model = Order
-"""
 
 @staff_member_required
 def product_register(request):

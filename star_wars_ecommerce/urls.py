@@ -10,7 +10,6 @@ from register import views as v
 from core import views as core_v
 #commerce imports
 from commerce import views as commerce_v
-from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     path('', core_v.home, name='home'),
@@ -25,8 +24,8 @@ urlpatterns = [
     path('register/reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name="password_reset_confirm.html"),name='password_reset_confirm'),
     path('register/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="password_reset/password_reset_complete.html"), name="password_reset_complete"),
     #--commerce--#
-    path('commerce/', commerce_v.ProductList.as_view(), name='product_list'),
-    #path('commerce/', commerce_v.product_list, name='product_list'),
+    path('commerce/', commerce_v.product_list, name='product_list'),
+    path('commerce/<int:pk>/', commerce_v.detail_product, name='detail_product'),
     path('commerce/register_product/', commerce_v.product_register, name='product_register'),
     path('commerce/product_order/', commerce_v.product_order, name='product_order'),
     path('commerce/order_list/', commerce_v.order_list, name='order_list'),
