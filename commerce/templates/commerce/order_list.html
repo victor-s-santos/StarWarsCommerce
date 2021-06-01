@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="mt-5">
+    <h2>Welcome to Commerce Page!</h2>
+</div>
+<div class="content mt-1">
+    {% for o in orders %}
+    <div class="card bg-light text-dark">
+        <div class="card-header">{{ o.product_name }}</div>
+        <div class="card-body">{{ o.suggested_price }}</div>
+        <div class="card-footer">{{ o.amount }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

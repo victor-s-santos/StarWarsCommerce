@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -10,6 +10,13 @@ def product_list(request):
     """Product List"""
     products = Product.objects.all()
     return render(request, 'commerce/product_list.html', {"products": products})
+
+@login_required
+def order_list(request):
+    """Order List"""
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'commerce/order_list.html', {"orders": orders})
+
 
 @staff_member_required
 def product_register(request):
