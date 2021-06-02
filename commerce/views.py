@@ -5,7 +5,7 @@ from .forms import ProductForm, OrderForm
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.views.generic import DeleteView, ListView, UpdateView, DetailView
+from cloudinary.forms import cl_init_js_callbacks      
 
 @login_required
 def product_list(request):
@@ -22,7 +22,7 @@ def detail_product(request, pk):
 def product_edit(request, pk):
     product = get_object_or_404(Product, pk=pk)
     if request.method == 'POST':
-        form = ProductForm(request.POST, instance=product)
+        form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
             product = form.save(commit=False)
             product.published_date = timezone.now()
@@ -40,7 +40,7 @@ def product_edit(request, pk):
 def product_register(request):
     """Register Products"""
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
             product.user = request.user
@@ -48,7 +48,6 @@ def product_register(request):
             messages.success(request, 'You have successfully registered a product!')
             return redirect('product_register')
         else:
-            messages.error(request, 'Email or username already registered.')
             return render(request, 'commerce/product_register.html', {'form': form})
     else:
         form = ProductForm()

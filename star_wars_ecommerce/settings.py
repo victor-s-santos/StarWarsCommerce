@@ -1,6 +1,9 @@
 import os
 from decouple import config
 from dj_database_url import parse as dburl
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -35,6 +38,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     #django-extensions,
     'django_extensions',
+    #cloudinary
+    'cloudinary',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -129,6 +134,13 @@ EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+#cloudinary configs
+cloudinary.config( 
+  cloud_name = config('CLOUD_NAME'), 
+  api_key = config('API_KEY'), 
+  api_secret = config('API_SECRET') 
+)
 
 #redirect logout and login
 LOGIN_URL = 'login'
