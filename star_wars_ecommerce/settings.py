@@ -127,6 +127,11 @@ AUTHENTICATION_BACKENDS = [
     'register.backends.EmailBackend',
 ]
 
+#redirect logout and login
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 #email vars
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 EMAIL_HOST = config('EMAIL_HOST')
@@ -141,8 +146,3 @@ cloudinary.config(
   api_key = config('API_KEY'), 
   api_secret = config('API_SECRET') 
 )
-
-#redirect logout and login
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
