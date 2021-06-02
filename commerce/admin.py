@@ -3,7 +3,7 @@ from .models import Product, Order
 
 class ProductAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_date'
-    list_display = ['product_name', 'unit_price', 'multiple', 'published_date']
+    list_display = ['product_name', 'unit_price', 'multiple', 'image','published_date']
     search_fields = ['product_name', 'unit_price', 'multiple', 'published_date']
     list_filter = ['product_name', 'unit_price', 'multiple', 'published_date']
 

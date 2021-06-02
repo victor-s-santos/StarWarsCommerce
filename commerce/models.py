@@ -1,12 +1,15 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf import settings
+from cloudinary.models import CloudinaryField
+
 
 class Product(models.Model):
     """Model of the products being sold"""
     product_name = models.CharField("Product", max_length=100, blank=False, null=False)
     unit_price = models.FloatField("Unit Price (R$)", validators=[MinValueValidator(10.0), MaxValueValidator(10000000.0)], blank=False, null=False)
-    multiple = models.IntegerField("Multiple", default=1, null=True, blank=True)
+    multiple = models.IntegerField("Multiple", default=1, validators=[MinValueValidator(1)], null=False, blank=False)
+    image = CloudinaryField('image')
     published_date = models.DateField(auto_now_add=True)
 
     class Meta:

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load cloudinary %}
 {% block content %}
 <div class="mt-5">
     <h2><p>Use the bellow form to register products.</p></h2>
 </div>
 <div class="mt-5">
-    <form class="forms" action="" method="POST">
+    <form class="forms" action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col-6">
@@ -20,6 +21,18 @@
                 {{ form.multiple|as_crispy_field }}
             </div>
         </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.image|as_crispy_field }}
+            </div>
+        </div>
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+        {% for error in form.errors %}
+            <strong>{{ form.non_field_errors }}</strong>
+        {% endfor %}
+        </div>
+        {% endif %}
         <input type="submit" class="btn btn-primary" value="Finish Signup">
     </form>
 </div>
