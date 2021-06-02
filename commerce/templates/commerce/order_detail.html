@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="mt-5">
-    <h2>Detail Product</h2>
+    <h2>Detail Order</h2>
 </div>
 <div class="content mt-1 mb-5">
     <div class="card bg-light text-dark">
         <div class="card-header">{{ order.product_name }}</div>
-        <div class="card-body"><li>Suggested Price: {{ order.suggested_price }}</li><li>Amount: {{ order.amount }}</li></div>
-        {% if user.is_superuser %}
-        <div class="card-footer"><a class="btn btn-primary" href="{% url 'order_edit' pk=order.pk %}"></a>Update</a></div>
-        {% endif %}
+        <div class="card-body"><ul><li>Suggested Price: {{ order.suggested_price }}</li><li>Amount: {{ order.amount }}</li></ul></div>
+        <div class="card-footer">
+            <ul>
+                <li><a class="btn btn-primary" href="{% url 'order_edit' pk=order.pk %}">Update</a></li>
+                <li><a class="btn btn-primary" href="{% url 'order_remove' pk=order.pk %}">Remove</a></li> 
+            </ul>
     </div>
 </div>
 {% endblock %}

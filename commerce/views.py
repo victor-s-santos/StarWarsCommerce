@@ -54,6 +54,14 @@ def product_register(request):
         form = ProductForm()
     return render(request, 'commerce/product_register.html', {'form': form})
 
+@staff_member_required
+def product_remove(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    name = product.product_name
+    product.delete()
+    messages.success(request, f'The product:{name} has been deleted successfully.')
+    return redirect('product_list')
+
 @login_required
 def order_list(request):
     """Order List"""
@@ -70,12 +78,12 @@ def register_order(request):
             order.user = request.user
             order.save()
             messages.success(request, 'You have successfully registered order from the product!')
-            return redirect('product_order')
+            return redirect('register_order')
         else:
-            return render(request, 'commerce/product_order.html', {'form': form})
+            return render(request, 'commerce/register_order.html', {'form': form})
     else:
         form = OrderForm()
-    return render(request, 'commerce/product_order.html', {'form': form})
+    return render(request, 'commerce/register_order.html', {'form': form})
 
 @login_required
 def order_detail(request, pk):
@@ -93,10 +101,18 @@ def order_edit(request, pk):
             order.user = request.user
             order.published_date = timezone.now()
             order.save()
-            return redirect('detail_product', pk=product.pk)
+            messages.success(request, 'You have successfully updated order from the product!')
+            return redirect('order_detail', pk=order.pk)
         else:
-            messages.error(request, 'Invalid Values.')
-            return render(request, 'commerce/product_edit.html', {'form': form})
+            return render(request, 'commerce/order_edit.html', {'form': form})
     else:
         form = OrderForm(instance=order)
     return render(request, 'commerce/order_edit.html', {'form': form})
+
+@login_required
+def order_remove(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    name = order.product_name
+    order.delete()
+    messages.success(request, f'The order of the product:{name} has been deleted successfully.')
+    return redirect('order_list')
