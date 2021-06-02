@@ -56,6 +56,7 @@ def product_register(request):
 
 @staff_member_required
 def product_remove(request, pk):
+    """Remove product"""
     product = get_object_or_404(Product, pk=pk)
     name = product.product_name
     product.delete()
@@ -93,6 +94,7 @@ def order_detail(request, pk):
 
 @login_required
 def order_edit(request, pk):
+    """Edit Order"""
     order = get_object_or_404(Order, pk=pk)
     if request.method == 'POST':
         form = OrderForm(request.POST, instance=order)
@@ -111,6 +113,7 @@ def order_edit(request, pk):
 
 @login_required
 def order_remove(request, pk):
+    """Remove Order"""
     order = get_object_or_404(Order, pk=pk)
     name = order.product_name
     order.delete()
