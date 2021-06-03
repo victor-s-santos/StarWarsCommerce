@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login as auth_login
 from django.core import mail
 from django.contrib import messages
 from django.template.loader import render_to_string
 from .forms import RegisterForm, ProfileForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from decouple import config
 
- 
 def register(request):
     """Realize the signup user"""
     if request.method == "POST":
@@ -53,5 +54,28 @@ def profile(request):
         form = ProfileForm()
     return render(request, 'register/infos.html', {'form': form})
 
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
 
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                messages.success(request, 'You have been logged successfully.')
+                return redirect('home')
+        else:
+            messages.error(request,'Username or Password not correct')
+            return redirect('login')
 
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'You have been logouted successfully.')
+    return redirect('/login')

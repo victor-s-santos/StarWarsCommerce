@@ -8,10 +8,8 @@
         <div class="card-header">{{ order.product_name }}</div>
         <div class="card-body"><ul><li>Suggested Price: {{ order.suggested_price }}</li><li>Amount: {{ order.amount }}</li></ul></div>
         <div class="card-footer">
-            <ul>
-                <li><a class="btn btn-primary" href="{% url 'order_edit' pk=order.pk %}">Update</a></li>
-                <li><a class="btn btn-primary" href="{% url 'order_remove' pk=order.pk %}">Remove</a></li> 
-            </ul>
-    </div>
+            <a class="btn btn-outline-info" href="{% url 'order_edit' pk=order.pk %}">Update</a>
+            <a class="btn btn-outline-info" href="{% url 'order_remove' pk=order.pk %}">Remove</a> 
+        </div>
 </div>
 {% endblock %}

@@ -10,10 +10,8 @@
         <div class="card-footer"><a href="{% url 'register_order' %}"><button class="btn btn-success">Buy</button></a></div>
         {% if user.is_superuser %}
         <div class="card-footer">
-            <ul>
-                <li><a class="btn btn-primary" href="{% url 'product_edit' pk=product.pk %}">Update</a></li>
-                <li><a class="btn btn-primary" href="{% url 'product_remove' pk=product.pk %}">Remove</a></li>
-            </ul>
+            <a class="btn btn-outline-info" href="{% url 'product_edit' pk=product.pk %}">Update</a>
+            <a class="btn btn-outline-info" href="{% url 'product_remove' pk=product.pk %}">Remove</a>
         </div>
         {% endif %}
     </div>

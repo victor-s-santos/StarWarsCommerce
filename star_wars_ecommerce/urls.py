@@ -16,8 +16,9 @@ urlpatterns = [
     #--register--#
     path('register/', v.register, name='register'),
     path('register/infos/', v.profile, name='profile'),
-    #--login--#
-    path('', include('django.contrib.auth.urls'), name='login'),#using only this url from this include
+    #--login e logout--#
+    path('login/', v.login_view, name='login'),
+    path('logout/', v.logout_view, name='logout'),
     #--reset_password--#
     path('register/reset_password/', auth_views.PasswordResetView.as_view(template_name="password_reset/password_reset.html"), name="reset_password"),
     path('register/reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="password_reset/password_reset_sent.html"), name="password_reset_done"),

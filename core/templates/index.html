@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 <div class="mt-5">
-    <h2>Welcome to Home Page!</h2>
+    <div class="float-left"><h2>Welcome to Home Page!</h2></div>
+    <div class="logo-image">
+        <img src="{% static 'img/Star-Wars-Logo.png' %}" class="rounded mx-auto d-block img-fluid" alt="logo"/>
+    </div>
 </div>
 {% endblock %}
