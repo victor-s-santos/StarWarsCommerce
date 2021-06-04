@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import authenticate, logout, login as auth_login
 from django.core import mail
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -20,7 +19,7 @@ def register(request):
             username = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            auth_login(request, user)
             body = render_to_string('register/email_signup.txt',
                                     form.cleaned_data)
             mail.send_mail('Sign up Confirmation',
@@ -63,7 +62,7 @@ def login_view(request):
 
         if user is not None:
             if user.is_active:
-                login(request, user)
+                auth_login(request, user)
                 messages.success(request, 'You have been logged successfully.')
                 return redirect('home')
         else:
