@@ -1,1 +1,7 @@
 Welcome to Starwars Commerce
+You have been registered successfully.
+
+Now you can access our system using the email provided, {{ email }}.
+Thank you {{ first_name }}.
+
+ 

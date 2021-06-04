@@ -3,6 +3,7 @@ from pytest import raises
 from model_mommy import mommy
 from commerce.models import Product, Order
 from django.db.models import CharField, FloatField, IntegerField, OneToOneField, ForeignKey
+from django.conf import settings
 
 list_product_fields = [
     (Product._meta.get_field("product_name"), CharField),
@@ -22,19 +23,24 @@ list_order_fields = [
 def test_register_product():
     """Must register objects in model Product"""
     assert Product.objects.count() == 0
-    mommy.make(Product)
+    Product.objects.create(
+        product_name = 'Starwars', unit_price = 10, multiple = 1
+    )
     assert Product.objects.count() == 1
-    mommy.make(Product)
-    assert Product.objects.count() == 2
 
 @pytest.mark.django_db
-def test_register_order():
+def test_register_order(logged_user):
     """Must register objects in model Order"""
     assert Order.objects.count() == 0
-    mommy.make(Order)
+    Order.objects.create(
+        user = logged_user,
+        product_name = Product.objects.create(
+            product_name = 'Starwars', unit_price = 10, multiple = 1
+            ),
+        suggested_price = 10,
+        amount = 2
+    )
     assert Order.objects.count() == 1
-    mommy.make(Order)
-    assert Order.objects.count() == 2
 
 @pytest.mark.django_db
 def test_exists_fields_product():

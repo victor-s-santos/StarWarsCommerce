@@ -15,10 +15,3 @@ def client_with_user(client, django_user_model, logged_user):
     """Force user login"""
     client.force_login(logged_user)
     return client
-
-@pytest.fixture
-def create_product(django_user_model):
-    return Product.objects.create(
-        product_name='Starwars-ship', unit_price=100,
-        multiple=1
-    ).save()

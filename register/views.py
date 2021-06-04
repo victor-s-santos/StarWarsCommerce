@@ -56,9 +56,7 @@ def profile(request):
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=request.POST['username'], password=request.POST['password'])
 
         if user is not None:
             if user.is_active:

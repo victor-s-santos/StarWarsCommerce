@@ -46,6 +46,11 @@
     - __Register Users:__
         - . register_users.sh
 
+    - __OBS:__
+        - To register in production mode with the system on heroku:
+          - `heroku run .register_users.sh`
+          - `heroku run .register_products.sh`
+
 * ## __Create the SuperUser:__
     - python manage.py createsuperuser
 
