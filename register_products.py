@@ -26,4 +26,8 @@ for i in list_products:
     p.save()
     print(f'{i["product_name"]} has been registered!')
 
-#as imagens não serão hospedadas no cloudinary, infelizmente não foi possível encontrar uma maneira de fazê-lo
+"""
+as imagens não serão hospedadas no cloudinary, infelizmente não foi possível encontrar 
+uma maneira de fazê-lo por linha de comando. Ao importar as dependências do cloudinary e as
+credenciais através do .env, é retornado erro. 
+"""
