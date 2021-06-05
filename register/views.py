@@ -45,7 +45,7 @@ def profile(request):
             profile.user = request.user
             profile.save()
             messages.success(request, 'Thank you!')
-            return redirect('home')
+            return redirect('core:home')
         else:
             messages.error(request, 'Please review the information you are trying to submit.')
             return render(request, 'register/infos.html', {'form': form})
@@ -62,7 +62,7 @@ def login_view(request):
             if user.is_active:
                 auth_login(request, user)
                 messages.success(request, 'You have been logged successfully.')
-                return redirect('home')
+                return redirect('core:home')
         else:
             messages.error(request,'Username or Password not correct')
             return redirect('login')
@@ -75,4 +75,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, 'You have been logouted successfully.')
-    return redirect('/login')
+    return redirect('login')
