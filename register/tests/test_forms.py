@@ -1,10 +1,11 @@
 import pytest
+from django.shortcuts import resolve_url as url
 from register.forms import RegisterForm, ProfileForm
 
 #RegisterForm
 def test_form_signup(client):
     """Context must have RegisterForm"""
-    form = client.get('/register/').context['form']
+    form = client.get(url('register')).context['form']
     assert isinstance(form, RegisterForm)
 
 def test_form_number_of_fields(client):
