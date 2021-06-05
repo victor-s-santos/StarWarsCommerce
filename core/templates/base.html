@@ -25,16 +25,16 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'product_list' %}">Product List</a>
+          <a class="nav-link" href="{% url 'commerce:product_list' %}">Product List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'product_register' %}">Register Product</a>
+          <a class="nav-link" href="{% url 'commerce:product_register' %}">Register Product</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'register_order' %}">Register Order</a>
+          <a class="nav-link" href="{% url 'commerce:register_order' %}">Register Order</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'order_list' %}">Order List</a>
+          <a class="nav-link" href="{% url 'commerce:order_list' %}">Order List</a>
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">

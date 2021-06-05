@@ -2,13 +2,13 @@ import pytest
 from django.shortcuts import resolve_url as url
 
 path_list_authenticated_templates = [
-    ('product_list', 'commerce/product_list.html'),
-    ('order_list', 'commerce/order_list.html'),
-    ('register_order', 'commerce/register_order.html'),
+    ('commerce:product_list', 'commerce/product_list.html'),
+    ('commerce:order_list', 'commerce/order_list.html'),
+    ('commerce:register_order', 'commerce/register_order.html'),
 ]
 
 path_list_superuser_templates = [
-    ('product_register', 'commerce/product_register.html'),   
+    ('commerce:product_register', 'commerce/product_register.html'),   
 ]
 
 #authenticated user

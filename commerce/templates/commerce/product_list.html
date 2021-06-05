@@ -7,7 +7,7 @@
     {% if products %}
         {% for p in products %}
         <div class="card bg-light text-dark">
-            <div class="card-header"><a href="{% url 'detail_product' pk=p.pk %}">{{ p.product_name }}</a></div>
+            <div class="card-header"><a href="{% url 'commerce:detail_product' pk=p.pk %}">{{ p.product_name }}</a></div>
             <div class="card-body">Price: {{ p.unit_price }}</div>
             <div class="card-body"><img src="{{ p.image.url }}" class="img-thumbnail"></div>
         </div>

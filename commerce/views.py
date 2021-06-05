@@ -27,7 +27,7 @@ def product_edit(request, pk):
             product = form.save(commit=False)
             product.published_date = timezone.now()
             product.save()
-            return redirect('detail_product', pk=product.pk)
+            return redirect('commerce:detail_product', pk=product.pk)
         else:
             messages.error(request, 'Invalid Values.')
             return render(request, 'commerce/product_edit.html', {'form': form})
@@ -46,7 +46,7 @@ def product_register(request):
             product.user = request.user
             product.save()
             messages.success(request, 'You have successfully registered a product!')
-            return redirect('product_register')
+            return redirect('commerce:product_register')
         else:
             return render(request, 'commerce/product_register.html', {'form': form})
     else:
@@ -60,7 +60,7 @@ def product_remove(request, pk):
     name = product.product_name
     product.delete()
     messages.success(request, f'The product:{name} has been deleted successfully.')
-    return redirect('product_list')
+    return redirect('commerce:product_list')
 
 @login_required
 def order_list(request):
@@ -78,7 +78,7 @@ def register_order(request):
             order.user = request.user
             order.save()
             messages.success(request, 'You have successfully registered order from the product!')
-            return redirect('register_order')
+            return redirect('commerce:register_order')
         else:
             return render(request, 'commerce/register_order.html', {'form': form})
     else:
@@ -103,7 +103,7 @@ def order_edit(request, pk):
             order.published_date = timezone.now()
             order.save()
             messages.success(request, 'You have successfully updated order from the product!')
-            return redirect('order_detail', pk=order.pk)
+            return redirect('commerce:order_detail', pk=order.pk)
         else:
             return render(request, 'commerce/order_edit.html', {'form': form})
     else:
@@ -117,4 +117,4 @@ def order_remove(request, pk):
     name = order.product_name
     order.delete()
     messages.success(request, f'The order of the product:{name} has been deleted successfully.')
-    return redirect('order_list')
+    return redirect('commerce:order_list')

@@ -7,9 +7,9 @@
     {% if orders %}
         {% for o in orders %}
         <div class="card bg-light text-dark">
-            <div class="card-header"><a href="{% url 'order_detail' pk=o.pk %}">{{ o.product_name }}</a></div>
+            <div class="card-header"><a href="{% url 'commerce:order_detail' pk=o.pk %}">{{ o.product_name }}</a></div>
             <div class="card-body">{{ o.suggested_price }}</div>
-            <div class="card-footer">{{ o.amount }}</div>
+            <div class="card-body"><img src="{{ o.product_name.image.url }}" class="img-thumbnail"></div>            <div class="card-footer">{{ o.amount }}</div>
         </div> 
         {% endfor %}
     {% else %}

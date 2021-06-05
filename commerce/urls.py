@@ -1,6 +1,7 @@
 from django.urls import path
 from commerce import views as commerce_v
 
+app_name = 'commerce'
 urlpatterns = [
     path('commerce/', commerce_v.product_list, name='product_list'),
     path('commerce/product_list/<int:pk>/', commerce_v.detail_product, name='detail_product'),

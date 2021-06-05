@@ -2,18 +2,18 @@ from django.urls import reverse
 import pytest
 
 list_reverse_names_authenticated = [
-    ('product_list', 200),
-    ('order_list', 200),
-    ('register_order', 200),
-    ('product_register', 302),
+    ('commerce:product_list', 200),
+    ('commerce:order_list', 200),
+    ('commerce:register_order', 200),
+    ('commerce:product_register', 302),
 ]
 
 list_reverse_names_admin = [
-    ('product_list', 200),
-    ('order_list', 200),
-    ('register_order', 200),
-    ('product_register', 200),
-    ('register_order', 200),
+    ('commerce:product_list', 200),
+    ('commerce:order_list', 200),
+    ('commerce:register_order', 200),
+    ('commerce:product_register', 200),
+    ('commerce:register_order', 200),
 ]
 
 

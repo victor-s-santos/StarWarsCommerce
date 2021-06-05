@@ -7,11 +7,11 @@
     <div class="card bg-light text-dark">
         <div class="card-header">{{ product.product_name }}</div>
         <div class="card-body"><ul><li>Price: {{ product.unit_price }}</li><li>Multiples: {{ product.multiple }}</li></ul></div>
-        <div class="card-footer"><a href="{% url 'register_order' %}"><button class="btn btn-success">Buy</button></a></div>
+        <div class="card-footer"><a href="{% url 'commerce:register_order' %}"><button class="btn btn-success">Buy</button></a></div>
         {% if user.is_superuser %}
         <div class="card-footer">
-            <a class="btn btn-outline-info" href="{% url 'product_edit' pk=product.pk %}">Update</a>
-            <a class="btn btn-outline-info" href="{% url 'product_remove' pk=product.pk %}">Remove</a>
+            <a class="btn btn-outline-info" href="{% url 'commerce:product_edit' pk=product.pk %}">Update</a>
+            <a class="btn btn-outline-info" href="{% url 'commerce:product_remove' pk=product.pk %}">Remove</a>
         </div>
         {% endif %}
     </div>
