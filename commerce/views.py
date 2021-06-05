@@ -14,9 +14,21 @@ def product_list(request):
     return render(request, 'commerce/product_list.html', {"products": products})
 
 @login_required
+def order_list(request):
+    """Order List"""
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'commerce/order_list.html', {"orders": orders})
+
+@login_required
 def detail_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'commerce/product_detail.html', {'product': product})
+
+@login_required
+def order_detail(request, pk):
+    """Order detail"""
+    order = get_object_or_404(Order, pk=pk)
+    return render(request, 'commerce/order_detail.html', {'order': order})
 
 @staff_member_required
 def product_edit(request, pk):
@@ -40,17 +52,22 @@ def product_edit(request, pk):
 def product_register(request):
     """Register Products"""
     if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.user = request.user
-            product.save()
-            messages.success(request, 'You have successfully registered a product!')
-            return redirect('commerce:product_register')
-        else:
-            return render(request, 'commerce/product_register.html', {'form': form})
+        return _create_product(request)
     else:
-        form = ProductForm()
+        return _new_product(request)
+
+def _create_product(request):
+    form = ProductForm(request.POST, request.FILES)
+    if not form.is_valid():
+        return render(request, 'commerce/product_register.html', {'form': form})
+    product = form.save(commit=False)
+    product.user = request.user
+    product.save()
+    messages.success(request, 'You have successfully registered a product!')
+    return redirect('commerce:product_register')
+
+def _new_product(request):
+    form = ProductForm()
     return render(request, 'commerce/product_register.html', {'form': form})
 
 @staff_member_required
@@ -63,33 +80,28 @@ def product_remove(request, pk):
     return redirect('commerce:product_list')
 
 @login_required
-def order_list(request):
-    """Order List"""
-    orders = Order.objects.filter(user=request.user)
-    return render(request, 'commerce/order_list.html', {"orders": orders})
-
-@login_required
 def register_order(request):
     """Product Orders"""
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            order = form.save(commit=False)
-            order.user = request.user
-            order.save()
-            messages.success(request, 'You have successfully registered order from the product!')
-            return redirect('commerce:register_order')
-        else:
-            return render(request, 'commerce/register_order.html', {'form': form})
+    if request.method == 'POST': 
+        return _create_order(request)
     else:
-        form = OrderForm()
+        return _new_order(request)
+
+def _create_order(request):
+    form = OrderForm(request.POST)
+    if not form.is_valid():
+        messages.error(request, 'An error occurred in your order register.')
+        return render(request, 'commerce/register_order.html', {'form': form})
+    order = form.save(commit=False)
+    order.user = request.user
+    order.save()
+    messages.success(request, 'You have successfully registered order from the product!')
+    return redirect('commerce:register_order')
+    
+def _new_order(request):
+    form = OrderForm()
     return render(request, 'commerce/register_order.html', {'form': form})
 
-@login_required
-def order_detail(request, pk):
-    """Order detail"""
-    order = get_object_or_404(Order, pk=pk)
-    return render(request, 'commerce/order_detail.html', {'order': order})
 
 @login_required
 def order_edit(request, pk):

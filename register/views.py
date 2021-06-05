@@ -11,11 +11,11 @@ from decouple import config
 def register(request):
     """Realize the signup user"""
     if request.method == "POST":
-        return create(request)
+        return _create(request)
     else:
-        return new(request)
+        return _new(request)
 
-def create(request):
+def _create(request):
     form = RegisterForm(request.POST)
     if not form.is_valid():
         messages.error(request, 'Email or username already registered.')
@@ -44,7 +44,7 @@ def _send_email(subject, email_from, to, template_name, context):
         body = render_to_string(template_name, context)
         mail.send_mail(subject, body, email_from, [email_from, to])
 
-def new(request):
+def _new(request):
     form = RegisterForm()
     return render(request, 'register/register.html', {'form': form})
 
