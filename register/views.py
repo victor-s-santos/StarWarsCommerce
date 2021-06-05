@@ -17,25 +17,32 @@ def register(request):
 
 def create(request):
     form = RegisterForm(request.POST)
-    if form.is_valid():
-        email_from = config('EMAIL_FROM')
-        form.save()
-        messages.success(request, "User has been registered successfully!")
-        username = form.cleaned_data.get('email')
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=raw_password)
-        auth_login(request, user)
-        body = render_to_string('register/email_signup.txt',
-                                form.cleaned_data)
-        mail.send_mail('Sign up Confirmation',
-                        body,
-                        email_from,
-                        [email_from, form.cleaned_data['email']])
-        
-        return redirect('profile')
-    else:
+    if not form.is_valid():
         messages.error(request, 'Email or username already registered.')
         return render(request, 'register/register.html', {'form': form})
+    #send email
+    form.save()
+    _send_email("User has been registered successfully!",
+                config('EMAIL_FROM'),
+                form.cleaned_data['email'],
+                'register/email_signup.txt',
+                form.cleaned_data
+                )
+    username = form.cleaned_data.get('email')
+    raw_password = form.cleaned_data.get('password1')
+    #login_user
+    _login_user(request, username, raw_password)
+    messages.success(request, "User has been registered successfully!")
+    return redirect('profile')
+
+def _login_user(request, username, raw_password):
+    user = authenticate(username=username, password=raw_password)
+    auth_login(request, user)
+    
+        
+def _send_email(subject, email_from, to, template_name, context):
+        body = render_to_string(template_name, context)
+        mail.send_mail(subject, body, email_from, [email_from, to])
 
 def new(request):
     form = RegisterForm()
