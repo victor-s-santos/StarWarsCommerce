@@ -6,7 +6,12 @@
 <div class="content mt-1 mb-5">
     <div class="card bg-light text-dark">
         <div class="card-header">{{ order.product_name }}</div>
-        <div class="card-body"><ul><li>Suggested Price: {{ order.suggested_price }}</li><li>Amount: {{ order.amount }}</li></ul></div>
+        <div class="card-body">
+            <ul><li>Suggested Price: {{ order.suggested_price }}</li>
+                <li>Amount: {{ order.amount }}</li>
+            </ul>
+            <img src="{{ order.product_name.image.url }}" class="img-thumbnail"></div>
+        </div>
         <div class="card-footer">
             <a class="btn btn-outline-info" href="{% url 'commerce:order_edit' pk=order.pk %}">Update</a>
             <a class="btn btn-outline-info" href="{% url 'commerce:order_remove' pk=order.pk %}">Remove</a> 
