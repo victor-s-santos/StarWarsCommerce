@@ -1,4 +1,4 @@
-from django.urls import reverse
+from django.shortcuts import resolve_url as url
 import pytest
 
 list_reverse_names_authenticated = [
@@ -20,11 +20,11 @@ list_reverse_names_admin = [
 
 @pytest.mark.parametrize('path, status_code', list_reverse_names_authenticated)
 def test_render_views(client_with_user, path, status_code):
-    assert client_with_user.get(reverse(path)).status_code == status_code
+    assert client_with_user.get(url(path)).status_code == status_code
 
 @pytest.mark.parametrize('path, status_code', list_reverse_names_admin)
 def test_render_views_admin(admin_client, path, status_code):
-    assert admin_client.get(reverse(path)).status_code == status_code
+    assert admin_client.get(url(path)).status_code == status_code
 
 
 
